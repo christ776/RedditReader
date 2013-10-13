@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  RedditReader
+
+  Created by Christian De Martino on 8/25/13.
+  Copyright (c) 2013 Christian De Martino. All rights reserved.
+*/
+
+"minutes_plural" = "%1$d minutes";
+"minutes" = "minutes";
+"days" = "1 day";
+"days_plural" = "%1$d days";
+"hours" = "1 hour";
+"hours_plural" = "%1$d hours";
+"moment"="a moment ago";

@@ -14,9 +14,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    
     // Create a 4MB in-memory, 32MB disk cache
     NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:4*1024*1024
                                                       diskCapacity:32*1024*1024
@@ -24,10 +21,6 @@
     
     // Set the shared cache to our new instance
     [NSURLCache setSharedURLCache:cache];
-    
-    self.viewController = [[RRTableViewController alloc] initWithNibName:@"RRTableViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
     return YES;
 }
 

@@ -19,5 +19,6 @@
 @property (nonatomic,assign) NSInteger ups;
 @property (nonatomic,assign) NSInteger downs;
 @property (nonatomic,strong) NSDate *creationDate;
+@property (nonatomic,strong) NSString *redditId;
 
 @end

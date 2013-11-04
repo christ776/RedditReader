@@ -51,22 +51,45 @@
             break;
     }
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            DLog(@"Did finished loading data %@ ",responseObject);
+            NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
+            
+            if (block) {
+                block(reddits, nil);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            if (block) {
+                block(nil,error);
+            }
+        }];
+    });
+}
+
+- (void)fetchRepliesForPost: (NSString*) redditId withCompletion:(void (^)(NSArray *obj, NSError *err))block {
     
-    [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
-        DLog(@"Did finished loading data %@ ",responseObject);
-        NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        if (block) {
+        NSString *urlString = [NSString stringWithFormat:COMMENTS_FOR_REDDIT, redditId];
+        
+        [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            DLog(@"Did finished loading data %@ ",responseObject);
+            NSArray* reddits =  [[JSONParser sharedInstance] parseComments:responseObject];
+            
             block(reddits, nil);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        if (block) {
-            block(nil,error);
-        }
-    }];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            if (block) {
+                block(nil,error);
+            }
+        }];
+    });
     
 }
 

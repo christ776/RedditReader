@@ -11,6 +11,7 @@
 #import "JSONParser.h"
 #import "RRReditEntry.h"
 #import "RRStore.h"
+#import "RRReditComment.h"
 
 @implementation JSONParser
 
@@ -40,6 +41,7 @@
         redditEntry.author = [redditData objectForKey:@"author"];
         redditEntry.num_comments = [redditData objectForKey:@"num_comments"];
         redditEntry.thumbnailURLString  = [redditData objectForKey:@"thumbnail"];
+        redditEntry.redditId = [redditData objectForKey:@"id"];
      
         redditEntry.creationDate = [NSDate dateWithTimeIntervalSince1970:[[redditData objectForKey:@"created"] doubleValue]];
         
@@ -49,6 +51,24 @@
     [RRStore sharedStore].lastRedditID = lastRedditID;
     
     return reddits;
+}
+
+-(NSArray*) parseComments : (NSArray*) commentsData {
+    
+    
+    NSMutableArray* comments = [NSMutableArray arrayWithCapacity:kInitialCapacity];
+    NSArray *commentsInfo = [[[commentsData lastObject] objectForKey:@"data"] objectForKey:@"children"];
+    
+    
+    for (NSDictionary *commentData in commentsInfo) {
+        
+        NSString *commentBody = [[commentData objectForKey:@"data"] objectForKey:@"body"];
+        RRReditComment *redditComment = [[RRReditComment alloc] init];
+        redditComment.body = commentBody;
+        [comments addObject:redditComment];
+    }
+    
+    return comments;
 }
 
 @end

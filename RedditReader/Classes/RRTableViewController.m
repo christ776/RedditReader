@@ -14,6 +14,9 @@
 #import "RRReditEntry.h"
 #import "UIImageView+WebCache.h"
 #import "NSDate+FormattingUtils.h"
+#import "RedditPostDetailViewController.h"
+
+static NSString *CellIdentifier = @"MyIdentifier";
 
 @interface RRTableViewController ()
 
@@ -35,9 +38,32 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.entries = [NSMutableArray array];
+        self.cellHeights = [NSMutableArray array];
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        self.entries = [NSMutableArray array];
+        self.cellHeights = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"RedditEntryCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [self.refreshControl addTarget:self
@@ -55,12 +81,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    RRReditEntryCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
-    if (cell == nil) {
-        
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RedditEntryCell" owner:self options:nil] objectAtIndex:0];
-    }
-    
+    RRReditEntryCellView *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+  
     RRReditEntry *redditEntry = [self.entries objectAtIndex:indexPath.row];
     
     cell.titleLabel.text = redditEntry.title;
@@ -121,18 +143,22 @@
 }
 
 
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    //Perform a segue.
+    [self performSegueWithIdentifier:@"RedditDetail" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"RedditDetail"])
+	{
+		RedditPostDetailViewController *detailViewController = segue.destinationViewController;
+		detailViewController.redditEntry =  [self.entries objectAtIndex:[ self.tableView indexPathForSelectedRow].row];
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+	}
 }
 
 -(void)setupTableViewFooter
@@ -183,10 +209,9 @@
             // If everything went ok reload the table.
             [self.entries addObjectsFromArray:obj];
             
-            [self.tableView beginUpdates];
-            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
-            [self.tableView endUpdates];
-            
+                [self.tableView beginUpdates];
+                [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+                [self.tableView endUpdates];
             
         } else {
             

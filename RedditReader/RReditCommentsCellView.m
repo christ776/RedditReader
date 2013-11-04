@@ -1,36 +1,29 @@
 //
-//  RRReditEntryCellViewCell.m
+//  RReditCommentsCellView.m
 //  RedditReader
 //
-//  Created by Christian De Martino on 8/24/13.
+//  Created by Christian De Martino on 10/27/13.
 //  Copyright (c) 2013 Christian De Martino. All rights reserved.
 //
 
-#import "RRReditEntryCellView.h"
-#import <QuartzCore/QuartzCore.h>
+#import "RReditCommentsCellView.h"
 
-@implementation RRReditEntryCellView
+@implementation RReditCommentsCellView
 
-@synthesize commentsLabel = _commentsLabel;
-@synthesize titleLabel = _titleLabel;
-@synthesize thumbnailView = _thumbnailView;
+@synthesize redditCommentsLabel = _redditCommentsLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-
+        // Initialization code
     }
     return self;
 }
 
 -(void) layoutSubviews {
     [super layoutSubviews];
-    self.imageView.frame = CGRectMake(5,5,60,60);
-    //self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.titleLabel.numberOfLines = 0;
-    self.authorLabel.textColor = [UIColor blueColor];
-   
+    self.redditCommentsLabel.numberOfLines = 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

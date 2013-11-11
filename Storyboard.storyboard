@@ -65,7 +65,7 @@
                                             <rect key="frame" x="10" y="12" width="300" height="38"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="38" id="dVe-6W-XZx"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="38" id="dVe-6W-XZx"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
                                             <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>

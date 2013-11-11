@@ -11,5 +11,8 @@
 @interface RRReditComment : NSObject
 
 @property (nonatomic,strong) NSString *body;
+@property (nonatomic,unsafe_unretained) int depth;
+@property (nonatomic,strong) NSArray *responses;
+@property (nonatomic,strong) NSString *author;
 
 @end

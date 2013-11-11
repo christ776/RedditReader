@@ -10,6 +10,7 @@
 #import "AFJSONRequestOperation.h"
 #import "JSONParser.h"
 #import "RRHTTPClient.h"
+#import "AFJSONRequestOperation.h"
 
 @interface RRStore ()
 
@@ -54,7 +55,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            DLog(@"Did finished loading data %@ ",responseObject);
+           // DLog(@"Did finished loading data %@ ",responseObject);
             NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
             
             if (block) {
@@ -78,8 +79,8 @@
         
         [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            DLog(@"Did finished loading data %@ ",responseObject);
-            NSArray* reddits =  [[JSONParser sharedInstance] parseComments:responseObject];
+            //DLog(@"Did finished loading data %@ ",responseObject);
+            NSArray* reddits =  [[JSONParser sharedInstance] parseComments:[responseObject lastObject] withDepth:0];
             
             block(reddits, nil);
             

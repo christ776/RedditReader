@@ -24,6 +24,16 @@
 -(void) layoutSubviews {
     [super layoutSubviews];
     self.redditCommentsLabel.numberOfLines = 0;
+    float indentPoints = self.indentationLevel * self.indentationWidth;
+    
+    self.contentView.frame = CGRectMake(indentPoints,
+                                        self.contentView.frame.origin.y,
+                                        self.contentView.frame.size.width - indentPoints,
+                                        self.contentView.frame.size.height);
+    
+    if (self.indentationLevel == 0) {
+        self.backgroundColor = [UIColor orangeColor];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

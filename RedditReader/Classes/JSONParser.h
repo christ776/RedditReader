@@ -13,6 +13,6 @@
 +(JSONParser*) sharedInstance;
 
 -(NSArray*) parseReddits :(NSDictionary*) redditData;
--(NSArray*) parseComments : (NSDictionary*) commentsData;
+-(NSArray*) parseComments : (NSDictionary*) commentsData withDepth:(int) depth;
 
 @end

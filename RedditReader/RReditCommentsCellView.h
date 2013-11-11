@@ -10,5 +10,6 @@
 
 @interface RReditCommentsCellView : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *redditCommentsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *authorLabel;
 
 @end

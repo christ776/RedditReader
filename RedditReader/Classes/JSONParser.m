@@ -53,22 +53,36 @@
     return reddits;
 }
 
--(NSArray*) parseComments : (NSArray*) commentsData {
-    
+-(NSArray*) parseComments : (NSDictionary*) commentsData withDepth:(int) depth {
     
     NSMutableArray* comments = [NSMutableArray arrayWithCapacity:kInitialCapacity];
-    NSArray *commentsInfo = [[[commentsData lastObject] objectForKey:@"data"] objectForKey:@"children"];
+    NSArray *commentsInfo = [[commentsData objectForKey:@"data"] objectForKey:@"children"];
     
     
     for (NSDictionary *commentData in commentsInfo) {
         
         NSString *commentBody = [[commentData objectForKey:@"data"] objectForKey:@"body"];
+        NSArray *commentReplies = [self parseCommentReplies:  [[commentData objectForKey:@"data"] objectForKey:@"replies"]
+                                                  withDepth: depth];
         RRReditComment *redditComment = [[RRReditComment alloc] init];
         redditComment.body = commentBody;
+        redditComment.depth = depth;
+        redditComment.author =  [[commentData objectForKey:@"data"] objectForKey:@"author"];
+        //redditComment.responses = commentReplies;
         [comments addObject:redditComment];
+        [comments addObjectsFromArray:commentReplies];
     }
     
     return comments;
 }
+
+-(NSArray*) parseCommentReplies:(id) replies withDepth:(int) depth {
+    
+    if ([replies isKindOfClass:[NSDictionary class]]) {
+        return [self parseComments:replies withDepth:depth+1];
+    }
+    else return nil;
+}
+
 
 @end

@@ -46,7 +46,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyIdentifier" id="5lT-QI-zlD">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyIdentifier" id="5lT-QI-zlD" customClass="RRReditEntryCellView">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5lT-QI-zlD" id="DWG-Qp-csT">
@@ -54,31 +54,46 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" id="xV4-wm-Pgh" customClass="RReditCommentsCellView">
-                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="commentCell" rowHeight="56" id="xV4-wm-Pgh" customClass="RReditCommentsCellView">
+                                <rect key="frame" x="0.0" y="130" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xV4-wm-Pgh" id="QFr-N2-ZW6">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="84x-gc-Cry">
-                                            <rect key="frame" x="10" y="6" width="300" height="42"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comments" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="84x-gc-Cry">
+                                            <rect key="frame" x="10" y="12" width="300" height="38"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="u08-8x-AwH"/>
+                                                <constraint firstAttribute="height" constant="38" id="dVe-6W-XZx"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                            <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzI-aR-t1y">
+                                            <rect key="frame" x="20" y="5" width="100" height="15"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="gaF-UJ-G5K"/>
+                                                <constraint firstAttribute="height" constant="15" id="hEt-uH-pEA"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="84x-gc-Cry" firstAttribute="centerX" secondItem="QFr-N2-ZW6" secondAttribute="centerX" id="E7S-rg-6Fp"/>
-                                        <constraint firstItem="84x-gc-Cry" firstAttribute="top" secondItem="QFr-N2-ZW6" secondAttribute="top" constant="6" id="N90-si-h91"/>
+                                        <constraint firstItem="kzI-aR-t1y" firstAttribute="top" secondItem="QFr-N2-ZW6" secondAttribute="top" constant="5" id="HEn-Wo-C9B"/>
+                                        <constraint firstItem="kzI-aR-t1y" firstAttribute="leading" secondItem="QFr-N2-ZW6" secondAttribute="leading" constant="20" symbolic="YES" id="PTt-jD-alZ"/>
                                         <constraint firstItem="84x-gc-Cry" firstAttribute="leading" secondItem="QFr-N2-ZW6" secondAttribute="leading" constant="10" id="T7j-Sf-v8k"/>
+                                        <constraint firstItem="84x-gc-Cry" firstAttribute="top" secondItem="QFr-N2-ZW6" secondAttribute="top" constant="12" id="kWx-AS-LdP"/>
+                                        <constraint firstItem="kzI-aR-t1y" firstAttribute="top" secondItem="QFr-N2-ZW6" secondAttribute="top" constant="5" id="lpZ-2Z-G8Z"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="authorLabel" destination="kzI-aR-t1y" id="nU6-c7-2LF"/>
                                     <outlet property="redditCommentsLabel" destination="84x-gc-Cry" id="ROj-PT-mAT"/>
                                 </connections>
                             </tableViewCell>

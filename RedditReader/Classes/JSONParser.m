@@ -61,14 +61,16 @@
     
     for (NSDictionary *commentData in commentsInfo) {
         
-        NSString *commentBody = [[commentData objectForKey:@"data"] objectForKey:@"body"];
-        NSArray *commentReplies = [self parseCommentReplies:  [[commentData objectForKey:@"data"] objectForKey:@"replies"]
+        NSDictionary *redditData = [commentData objectForKey:@"data"];
+        NSString *commentBody = [redditData objectForKey:@"body"];
+        NSArray *commentReplies = [self parseCommentReplies:  [redditData objectForKey:@"replies"]
                                                   withDepth: depth];
         RRReditComment *redditComment = [[RRReditComment alloc] init];
         redditComment.body = commentBody;
         redditComment.depth = depth;
-        redditComment.author =  [[commentData objectForKey:@"data"] objectForKey:@"author"];
-        //redditComment.responses = commentReplies;
+        redditComment.author =  [redditData objectForKey:@"author"];
+        NSDate *created = [NSDate dateWithTimeIntervalSince1970:[[redditData objectForKey:@"created"] doubleValue]];
+        redditComment.commentDateStr = [[self formatter] stringFromDate:created];
         [comments addObject:redditComment];
         [comments addObjectsFromArray:commentReplies];
     }
@@ -82,6 +84,16 @@
         return [self parseComments:replies withDepth:depth+1];
     }
     else return nil;
+}
+
+- (NSDateFormatter *)formatter {
+    static NSDateFormatter *formatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+    });
+    return formatter;
 }
 
 

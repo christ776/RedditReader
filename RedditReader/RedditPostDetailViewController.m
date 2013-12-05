@@ -37,9 +37,6 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
 {
     [super viewDidLoad];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"RedditEntryCell" bundle:nil] forCellReuseIdentifier:redditEntryCellIdentifier];
-   // [self.tableView registerClass:[RReditCommentsCellView class] forCellReuseIdentifier:commentCellIdentifier];
-    
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -52,7 +49,6 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
             for(int i= currentAmountOfEntries; i < obj.count + currentAmountOfEntries; i++)
             {
                 [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                
             }
             
             // If everything went ok reload the table.
@@ -96,19 +92,26 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height;
-    RRReditEntryCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
+    
     if (indexPath.row ==0)
     {
-      
+        RRReditEntryCellView *cell = [tableView dequeueReusableCellWithIdentifier:redditEntryCellIdentifier];
         cell.titleLabel.text = self.redditEntry.title;
+        height = [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height;
     }
     else {
-//        RReditCommentsCellView *cell = [tableView dequeueReusableCellWithIdentifier:commentCellIdentifier];
+        RReditCommentsCellView *cell = [tableView dequeueReusableCellWithIdentifier:commentCellIdentifier];
         RRReditComment  *redditCommnent = [self.comments objectAtIndex:indexPath.row -1];
-         cell.titleLabel.text = redditCommnent.body;
+         cell.redditCommentsLabel.text = redditCommnent.body;
+        
+        // force layout
+//        [cell setNeedsLayout];
+//        [cell layoutIfNeeded];
+        
+        height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height;
     }
-    height = [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,6 +135,7 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
         RRReditComment  *redditCommnent = [self.comments objectAtIndex:indexPath.row -1];
         cell.redditCommentsLabel.text = redditCommnent.body;
         cell.authorLabel.text = redditCommnent.author;
+        cell.commentDate.text = redditCommnent.commentDateStr;
         return cell;
     }
     

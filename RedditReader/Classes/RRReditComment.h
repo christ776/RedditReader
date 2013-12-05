@@ -14,5 +14,6 @@
 @property (nonatomic,unsafe_unretained) int depth;
 @property (nonatomic,strong) NSArray *responses;
 @property (nonatomic,strong) NSString *author;
+@property (nonatomic,strong) NSString *commentDateStr;
 
 @end

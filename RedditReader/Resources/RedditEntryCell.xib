@@ -18,7 +18,7 @@
                         <rect key="frame" x="78" y="7" width="238" height="89"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="238" id="320"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="238" id="320"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="89" id="401"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
@@ -37,7 +37,7 @@
             </tableViewCellContentView>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="14" secondAttribute="bottom" priority="225" constant="10" id="6ad-lA-rbD"/>
-                <constraint firstItem="14" firstAttribute="leading" secondItem="413" secondAttribute="trailing" constant="8" symbolic="YES" id="it5-Hh-D8r"/>
+                <constraint firstItem="14" firstAttribute="leading" secondItem="413" secondAttribute="trailing" priority="168" constant="8" symbolic="YES" id="it5-Hh-D8r"/>
                 <constraint firstItem="413" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="10" id="kdf-Gu-mJe"/>
                 <constraint firstItem="413" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="pbZ-kj-v9C"/>
                 <constraint firstItem="14" firstAttribute="top" secondItem="3" secondAttribute="top" constant="7" id="stD-A1-K9r"/>

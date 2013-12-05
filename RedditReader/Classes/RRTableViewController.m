@@ -16,8 +16,6 @@
 #import "NSDate+FormattingUtils.h"
 #import "RedditPostDetailViewController.h"
 
-static NSString *CellIdentifier = @"MyIdentifier";
-
 @interface RRTableViewController ()
 
 @property (nonatomic,strong) NSMutableArray *entries;
@@ -62,7 +60,7 @@ static NSString *CellIdentifier = @"MyIdentifier";
 {
     [super viewDidLoad];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"RedditEntryCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+   // [self.tableView registerNib:[UINib nibWithNibName:@"RedditEntryCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
@@ -81,6 +79,7 @@ static NSString *CellIdentifier = @"MyIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    static NSString *CellIdentifier = @"MyIdentifier";
     RRReditEntryCellView *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
   
     RRReditEntry *redditEntry = [self.entries objectAtIndex:indexPath.row];
@@ -93,7 +92,7 @@ static NSString *CellIdentifier = @"MyIdentifier";
                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     //cell.commentsLabel.text = [redditEntry.num_comments stringValue];
     //cell.creationTimeLabel.text = [NSDate displaytimeInterval:[redditEntry.creationDate timeIntervalSinceNow]];
-    [cell setNeedsUpdateConstraints];
+    //[cell setNeedsUpdateConstraints];
     return cell;
 }
 
@@ -124,10 +123,7 @@ static NSString *CellIdentifier = @"MyIdentifier";
     // Note that this method will init and return a new cell if there isn't one available in the reuse pool,
     // so either way after this line of code you will have a cell with the correct constraints ready to go.
     RRReditEntryCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
-    if (cell == nil) {
-        
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"RedditEntryCell" owner:self options:nil] objectAtIndex:0];
-    }
+ 
     // Configure the cell with content for the given indexPath, for example:
     // cell.textLabel.text = someTextForThisCell;
     // ...
@@ -142,14 +138,14 @@ static NSString *CellIdentifier = @"MyIdentifier";
     return 1;
 }
 
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+}
+
 
 #pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //Perform a segue.
-    [self performSegueWithIdentifier:@"RedditDetail" sender:self];
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -164,9 +160,9 @@ static NSString *CellIdentifier = @"MyIdentifier";
 -(void)setupTableViewFooter
 {
     // set up label
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44)];
     footerView.backgroundColor = [UIColor lightGrayColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44)];
     label.font = [UIFont boldSystemFontOfSize:16];
     label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentCenter;
@@ -194,10 +190,7 @@ static NSString *CellIdentifier = @"MyIdentifier";
         // When the request completes, this block will be called.
         
         if (!err) {
-   
-            // update tableview content
-            // easy way : call [tableView reloadData];
-            // nicer way : use insertRowsAtIndexPaths:withAnimation:
+
             NSMutableArray *indexPaths = [NSMutableArray array];
             int currentAmountOfEntries = self.entries.count;
             for(int i= currentAmountOfEntries; i < obj.count + currentAmountOfEntries; i++)

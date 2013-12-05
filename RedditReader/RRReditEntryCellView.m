@@ -26,6 +26,7 @@
 
 -(void) layoutSubviews {
     [super layoutSubviews];
+    
     self.imageView.frame = CGRectMake(5,5,60,60);
     //self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.titleLabel.numberOfLines = 0;

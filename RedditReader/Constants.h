@@ -18,5 +18,6 @@
 #define REDDIT_BASE_URL @"http://www.reddit.com/"
 #define TOP_REDDITS @"top.json"
 #define COMMENTS_FOR_REDDIT @"comments/%@.json"
+#define TOP_SUBREDDITS @"subreddits/popular.json"
 
 #endif

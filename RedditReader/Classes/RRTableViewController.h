@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHFacebookImageViewer.h"
 
-@interface RRTableViewController : UITableViewController
+@interface RRTableViewController : UITableViewController <MHFacebookImageViewerDatasource,UIGestureRecognizerDelegate>
 
+@property (strong, nonatomic) IBOutlet UISearchBar *redditSearchBar;
 @end

@@ -18,5 +18,5 @@ typedef NS_ENUM(NSUInteger, RedditRequestType) {Fetch_NextBatch, Fetch_Latest} ;
 
 - (void)fetchRedditFeed: (RedditRequestType) redditRequestType withCompletion:(void (^)(NSArray *obj, NSError *err))block;
 - (void)fetchRepliesForPost: (NSString*) redditId withCompletion:(void (^)(NSArray *obj, NSError *err))block;
-
+- (void)fetchSubRedditsWithCompletionBlock: (void (^) (NSArray* result)) success failure:(void (^)(NSError *error)) failureblock;
 @end

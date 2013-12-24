@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3107931E18539687001C19C6 /* MHFacebookImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3107931D18539687001C19C6 /* MHFacebookImageViewer.m */; };
 		311F6B0917C97060003A5A0E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 311F6B0817C97060003A5A0E /* ImageIO.framework */; };
 		31215DCC17C8EAC800B0F878 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31215DCB17C8EAC800B0F878 /* UIKit.framework */; };
 		31215DCE17C8EAC800B0F878 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31215DCD17C8EAC800B0F878 /* Foundation.framework */; };
@@ -23,6 +24,11 @@
 		31215E1F17C9422B00B0F878 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 31215E1E17C9422B00B0F878 /* JSONParser.m */; };
 		312DFAF317CB075700B7D9A2 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 312DFAF217CB075700B7D9A2 /* icon.png */; };
 		312DFAF517CB075C00B7D9A2 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 312DFAF417CB075B00B7D9A2 /* icon@2x.png */; };
+		313874AD1866517A009B3355 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 313874AB1866517A009B3355 /* JASidePanelController.m */; };
+		313874AE1866517A009B3355 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 313874AC1866517A009B3355 /* UIViewController+JASidePanel.m */; };
+		313874B1186651BC009B3355 /* RRSidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 313874B0186651BC009B3355 /* RRSidePanelController.m */; };
+		313874B5186653DA009B3355 /* RRSubRedditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 313874B4186653DA009B3355 /* RRSubRedditViewController.m */; };
+		313874B61866549D009B3355 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3146685B17CA6A9E007D721F /* QuartzCore.framework */; };
 		3146686017CA8FA5007D721F /* RRTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3146685E17CA8FA5007D721F /* RRTableViewController.m */; };
 		3146686517CAC2FE007D721F /* NSDate+FormattingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3146686417CAC2FE007D721F /* NSDate+FormattingUtils.m */; };
 		3146686A17CAC54C007D721F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3146686D17CAC54C007D721F /* Localizable.strings */; };
@@ -59,6 +65,7 @@
 		31BB8FD917C973D900F86D87 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BB8FCB17C973D900F86D87 /* UIImageView+WebCache.m */; };
 		31BB8FDB17C974C600F86D87 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BB8FDA17C974C600F86D87 /* MapKit.framework */; };
 		31BB8FDF17C9763400F86D87 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 31BB8FDE17C9763400F86D87 /* placeholder.jpg */; };
+		31CF0229186944D20053AEC6 /* RRSubReddit.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CF0228186944D20053AEC6 /* RRSubReddit.m */; };
 		31F9DD3A181DD8D80046090A /* RReditCommentsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F9DD39181DD8D80046090A /* RReditCommentsCellView.m */; };
 		31FBDFDF1813637E005BC356 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31FBDFDE1813637E005BC356 /* Storyboard.storyboard */; };
 		31FBDFE418139B6B005BC356 /* RedditPostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FBDFE318139B6B005BC356 /* RedditPostDetailViewController.m */; };
@@ -66,6 +73,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3107931C18539687001C19C6 /* MHFacebookImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFacebookImageViewer.h; sourceTree = "<group>"; };
+		3107931D18539687001C19C6 /* MHFacebookImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFacebookImageViewer.m; sourceTree = "<group>"; };
 		311F6B0817C97060003A5A0E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		31215DC817C8EAC800B0F878 /* RedditReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31215DCB17C8EAC800B0F878 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -92,6 +101,14 @@
 		31215E1E17C9422B00B0F878 /* JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONParser.m; path = Classes/JSONParser.m; sourceTree = "<group>"; };
 		312DFAF217CB075700B7D9A2 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		312DFAF417CB075B00B7D9A2 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		313874A91866517A009B3355 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
+		313874AA1866517A009B3355 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
+		313874AB1866517A009B3355 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
+		313874AC1866517A009B3355 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
+		313874AF186651BC009B3355 /* RRSidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSidePanelController.h; path = Classes/RRSidePanelController.h; sourceTree = "<group>"; };
+		313874B0186651BC009B3355 /* RRSidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSidePanelController.m; path = Classes/RRSidePanelController.m; sourceTree = "<group>"; };
+		313874B3186653DA009B3355 /* RRSubRedditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSubRedditViewController.h; path = Classes/RRSubRedditViewController.h; sourceTree = "<group>"; };
+		313874B4186653DA009B3355 /* RRSubRedditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSubRedditViewController.m; path = Classes/RRSubRedditViewController.m; sourceTree = "<group>"; };
 		3146685B17CA6A9E007D721F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3146685D17CA8FA5007D721F /* RRTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRTableViewController.h; path = Classes/RRTableViewController.h; sourceTree = "<group>"; };
 		3146685E17CA8FA5007D721F /* RRTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRTableViewController.m; path = Classes/RRTableViewController.m; sourceTree = "<group>"; };
@@ -157,6 +174,8 @@
 		31BB8FCB17C973D900F86D87 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		31BB8FDA17C974C600F86D87 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		31BB8FDE17C9763400F86D87 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = placeholder.jpg; path = Resources/images/placeholder.jpg; sourceTree = "<group>"; };
+		31CF0227186944D20053AEC6 /* RRSubReddit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSubReddit.h; path = Classes/RRSubReddit.h; sourceTree = "<group>"; };
+		31CF0228186944D20053AEC6 /* RRSubReddit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSubReddit.m; path = Classes/RRSubReddit.m; sourceTree = "<group>"; };
 		31F9DD38181DD8D80046090A /* RReditCommentsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RReditCommentsCellView.h; sourceTree = "<group>"; };
 		31F9DD39181DD8D80046090A /* RReditCommentsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RReditCommentsCellView.m; sourceTree = "<group>"; };
 		31FBDFDE1813637E005BC356 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = ../Storyboard.storyboard; sourceTree = "<group>"; };
@@ -171,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				313874B61866549D009B3355 /* QuartzCore.framework in Frameworks */,
 				3173C8D717CC4D0A001734CF /* Security.framework in Frameworks */,
 				3173C8D517CC4D04001734CF /* SystemConfiguration.framework in Frameworks */,
 				3173C8D317CC4CF0001734CF /* MobileCoreServices.framework in Frameworks */,
@@ -260,6 +280,8 @@
 		31215E0617C8F41200B0F878 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				31215E1D17C9422B00B0F878 /* JSONParser.h */,
+				31215E1E17C9422B00B0F878 /* JSONParser.m */,
 				31215E0817C90D5F00B0F878 /* RRStore.h */,
 				31215E0917C90D5F00B0F878 /* RRStore.m */,
 			);
@@ -271,10 +293,10 @@
 			children = (
 				31215E1117C91C6600B0F878 /* RRReditEntry.h */,
 				31215E1217C91C6600B0F878 /* RRReditEntry.m */,
-				31215E1D17C9422B00B0F878 /* JSONParser.h */,
-				31215E1E17C9422B00B0F878 /* JSONParser.m */,
 				31FBDFE51814751C005BC356 /* RRReditComment.h */,
 				31FBDFE61814751C005BC356 /* RRReditComment.m */,
+				31CF0227186944D20053AEC6 /* RRSubReddit.h */,
+				31CF0228186944D20053AEC6 /* RRSubReddit.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -288,6 +310,28 @@
 				31F9DD39181DD8D80046090A /* RReditCommentsCellView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		313874A818665164009B3355 /* SideController */ = {
+			isa = PBXGroup;
+			children = (
+				313874A91866517A009B3355 /* JASidePanelController.h */,
+				313874AA1866517A009B3355 /* UIViewController+JASidePanel.h */,
+				313874AB1866517A009B3355 /* JASidePanelController.m */,
+				313874AC1866517A009B3355 /* UIViewController+JASidePanel.m */,
+				313874AF186651BC009B3355 /* RRSidePanelController.h */,
+				313874B0186651BC009B3355 /* RRSidePanelController.m */,
+			);
+			name = SideController;
+			sourceTree = "<group>";
+		};
+		313874B2186653B1009B3355 /* leftSideController */ = {
+			isa = PBXGroup;
+			children = (
+				313874B3186653DA009B3355 /* RRSubRedditViewController.h */,
+				313874B4186653DA009B3355 /* RRSubRedditViewController.m */,
+			);
+			name = leftSideController;
 			sourceTree = "<group>";
 		};
 		3146686217CAC2C0007D721F /* Helpers */ = {
@@ -393,6 +437,10 @@
 		31FBDFE118139B2E005BC356 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				313874B2186653B1009B3355 /* leftSideController */,
+				313874A818665164009B3355 /* SideController */,
+				3107931C18539687001C19C6 /* MHFacebookImageViewer.h */,
+				3107931D18539687001C19C6 /* MHFacebookImageViewer.m */,
 				3146685D17CA8FA5007D721F /* RRTableViewController.h */,
 				3146685E17CA8FA5007D721F /* RRTableViewController.m */,
 				31FBDFE218139B6B005BC356 /* RedditPostDetailViewController.h */,
@@ -480,15 +528,19 @@
 				31215E0A17C90D5F00B0F878 /* RRStore.m in Sources */,
 				31215E1317C91C6600B0F878 /* RRReditEntry.m in Sources */,
 				31215E1B17C9218800B0F878 /* RRReditEntryCellView.m in Sources */,
+				313874AE1866517A009B3355 /* UIViewController+JASidePanel.m in Sources */,
 				31215E1F17C9422B00B0F878 /* JSONParser.m in Sources */,
 				31BB8FCC17C973D900F86D87 /* MKAnnotationView+WebCache.m in Sources */,
 				31BB8FCD17C973D900F86D87 /* NSData+GIF.m in Sources */,
+				31CF0229186944D20053AEC6 /* RRSubReddit.m in Sources */,
 				31BB8FCE17C973D900F86D87 /* SDImageCache.m in Sources */,
 				31BB8FCF17C973D900F86D87 /* SDWebImageCompat.m in Sources */,
 				31BB8FD017C973D900F86D87 /* SDWebImageDecoder.m in Sources */,
+				313874AD1866517A009B3355 /* JASidePanelController.m in Sources */,
 				31F9DD3A181DD8D80046090A /* RReditCommentsCellView.m in Sources */,
 				31BB8FD117C973D900F86D87 /* SDWebImageDownloader.m in Sources */,
 				31BB8FD217C973D900F86D87 /* SDWebImageDownloaderOperation.m in Sources */,
+				3107931E18539687001C19C6 /* MHFacebookImageViewer.m in Sources */,
 				31BB8FD317C973D900F86D87 /* SDWebImageManager.m in Sources */,
 				31BB8FD417C973D900F86D87 /* SDWebImagePrefetcher.m in Sources */,
 				31BB8FD517C973D900F86D87 /* UIButton+WebCache.m in Sources */,
@@ -504,12 +556,14 @@
 				3173C8C617CC4C7F001734CF /* AFJSONRequestOperation.m in Sources */,
 				3173C8C817CC4C7F001734CF /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3173C8CA17CC4C7F001734CF /* AFPropertyListRequestOperation.m in Sources */,
+				313874B1186651BC009B3355 /* RRSidePanelController.m in Sources */,
 				3173C8CC17CC4C7F001734CF /* AFURLConnectionOperation.m in Sources */,
 				3173C8CE17CC4C7F001734CF /* AFXMLRequestOperation.m in Sources */,
 				3173C8D017CC4C7F001734CF /* UIImageView+AFNetworking.m in Sources */,
 				3173C8DB17CC5542001734CF /* RRHTTPClient.m in Sources */,
 				31FBDFE418139B6B005BC356 /* RedditPostDetailViewController.m in Sources */,
 				31FBDFE71814751C005BC356 /* RRReditComment.m in Sources */,
+				313874B5186653DA009B3355 /* RRSubRedditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

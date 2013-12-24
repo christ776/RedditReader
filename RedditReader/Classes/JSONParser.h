@@ -14,5 +14,6 @@
 
 -(NSArray*) parseReddits :(NSDictionary*) redditData;
 -(NSArray*) parseComments : (NSDictionary*) commentsData withDepth:(int) depth;
+-(NSArray*) parseSubReddits : (NSDictionary*) subReddits;
 
 @end

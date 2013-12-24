@@ -91,6 +91,21 @@
             }
         }];
     });
+}
+
+- (void)fetchSubRedditsWithCompletionBlock: (void (^) (NSArray* result)) success failure:(void (^)(NSError *error)) failureblock {
+    
+    [[RRHTTPClient sharedClient] getPath:TOP_SUBREDDITS parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSArray* reddits =  [[JSONParser sharedInstance] parseSubReddits:responseObject];
+            success(reddits);
+        });
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failureblock(error);
+    }];
     
 }
 

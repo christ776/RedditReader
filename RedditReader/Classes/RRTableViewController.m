@@ -86,14 +86,42 @@
     
     cell.titleLabel.text = redditEntry.title;
 
-    //cell.authorLabel.text = redditEntry.author;
+    cell.authorLabel.text = redditEntry.author;
     // Here we use the new provided setImageWithURL: method to load the web image
     [cell.thumbnailView setImageWithURL:[NSURL URLWithString:redditEntry.thumbnailURLString]
                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-    //cell.commentsLabel.text = [redditEntry.num_comments stringValue];
-    //cell.creationTimeLabel.text = [NSDate displaytimeInterval:[redditEntry.creationDate timeIntervalSinceNow]];
+    cell.commentsLabel.text = [redditEntry.num_comments stringValue];
+    cell.creationTimeLabel.text = [NSDate displaytimeInterval:[redditEntry.creationDate timeIntervalSinceNow]];
     //[cell setNeedsUpdateConstraints];
+    
+    if ([redditEntry.type isEqualToString:@"youtube.com"]) {
+        
+        UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self action:@selector(handlePinch:)];
+        pgr.delegate = self;
+        [cell.thumbnailView addGestureRecognizer:pgr];
+       
+    }
+    else
+    {
+        cell.thumbnailView.contentMode = UIViewContentModeScaleAspectFill;
+        
+        [cell.thumbnailView setupImageViewerWithDatasource:self initialIndex:indexPath.row onOpen:^{
+            DLog(@"OPEN!");
+        } onClose:^{
+            DLog(@"CLOSE!");
+        }];
+    }
+    
     return cell;
+}
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer
+{
+    CGPoint tapPosition = [pinchGestureRecognizer locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapPosition];
+    RRReditEntry *reddit = [self.entries objectAtIndex:indexPath.row];
+    [[UIApplication sharedApplication] openURL:reddit.url];
 }
 
 #pragma UIRefreshControl methods
@@ -236,6 +264,12 @@
         // fetch next page of results
         [self fetchTopReddits:Fetch_NextBatch];
     }
+    if (scrollView.contentOffset.y > 0) {
+        UISearchBar *searchBar = self.redditSearchBar;
+        CGRect rect = searchBar.frame;
+        rect.origin.y = MIN(0, scrollView.contentOffset.y);
+        searchBar.frame = rect;
+    }
 }
 
 - (NSDateFormatter *)formatter {
@@ -246,6 +280,21 @@
          [formatter setDateFormat:@"MMM d, h:mm a"];
     });
     return formatter;
+}
+
+#pragma FacebookImageViewer delegate methods
+- (NSInteger) numberImagesForImageViewer:(MHFacebookImageViewer *)imageViewer {
+    return 1;
+}
+
+-  (NSURL*) imageURLAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer {
+    RRReditEntry *redditEntry = [self.entries objectAtIndex:index];
+    return redditEntry.url;
+}
+
+- (UIImage*) imageDefaultAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer{
+   
+    return [UIImage imageNamed:@"placeholder.jpg"];
 }
 
 @end

@@ -20,6 +20,7 @@
 @property (nonatomic,assign) NSInteger downs;
 @property (nonatomic,strong) NSDate *creationDate;
 @property (nonatomic,strong) NSString *redditId;
+@property (nonatomic,strong) NSString *type;
 @property (nonatomic,strong) NSArray *comments;
 
 @end

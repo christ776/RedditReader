@@ -12,6 +12,7 @@
 #import "RRReditEntry.h"
 #import "RRStore.h"
 #import "RRReditComment.h"
+#import "RRSubReddit.h"
 
 @implementation JSONParser
 
@@ -42,6 +43,13 @@
         redditEntry.num_comments = [redditData objectForKey:@"num_comments"];
         redditEntry.thumbnailURLString  = [redditData objectForKey:@"thumbnail"];
         redditEntry.redditId = [redditData objectForKey:@"id"];
+        
+        NSDictionary *media = [redditData objectForKey:@"media"];
+        if (![media isEqual: [NSNull null]]) {
+            redditEntry.type = [media objectForKey:@"type"];
+        }
+        
+        redditEntry.url = [NSURL URLWithString:[redditData objectForKey:@"url"]];
      
         redditEntry.creationDate = [NSDate dateWithTimeIntervalSince1970:[[redditData objectForKey:@"created"] doubleValue]];
         
@@ -84,6 +92,36 @@
         return [self parseComments:replies withDepth:depth+1];
     }
     else return nil;
+}
+
+
+-(NSArray*) parseSubReddits : (NSDictionary*) subReddits {
+    
+    NSMutableArray *subreddits = [NSMutableArray array];
+    NSArray *subRedditsData = [[subReddits objectForKey:@"data"] objectForKey:@"children"];
+    
+    for (NSDictionary *subRedditData in subRedditsData) {
+        
+        NSDictionary *subRedditDictonary = [subRedditData objectForKey:@"data"];
+        
+        [self removeNSNulls:subRedditDictonary];
+        
+        RRSubReddit *subreddit = [[RRSubReddit alloc] init];
+        subreddit.title = [subRedditDictonary objectForKey:@"display_name"];
+        subreddit.thumbnailURLString = [subRedditDictonary objectForKey:@"header_img"];
+        [subreddits addObject:subreddit];
+    }
+    return subreddits;
+}
+
+
+- (void) removeNSNulls:(NSDictionary*) dictionary {
+    //Let's remove those keys for whose values are NSNull
+    NSSet *nullSet = [dictionary keysOfEntriesWithOptions:NSEnumerationConcurrent passingTest:^BOOL(id key, id obj, BOOL *stop) {
+        return ([obj isEqual:[NSNull null]]);
+    }];
+    
+    [[dictionary mutableCopy] removeObjectsForKeys:[nullSet allObjects]];
 }
 
 - (NSDateFormatter *)formatter {

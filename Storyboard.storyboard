@@ -5,17 +5,89 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Reddit Reader-->
-        <scene sceneID="NOI-bT-gyw">
+        <!--Sub Reddit View Controller-->
+        <scene sceneID="tY5-qe-tdJ">
             <objects>
-                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZpR-Il-Gva" customClass="RRTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZOO-4G-7Se">
+                <tableViewController restorationIdentifier="leftViewController" storyboardIdentifier="leftViewController" id="uRQ-Tx-3li" customClass="RRSubRedditViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="t3N-7r-BvF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubredditCell" id="5jF-vA-Rj6">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5jF-vA-Rj6" id="30k-Ua-XHs">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uRQ-Tx-3li" id="TYv-Ni-zCN"/>
+                            <outlet property="delegate" destination="uRQ-Tx-3li" id="COS-zw-ze4"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VCn-Za-1gW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-60" y="-641"/>
+        </scene>
+        <!--Side Panel Controller-->
+        <scene sceneID="Vhe-oH-O7e">
+            <objects>
+                <viewController id="42H-fn-fQj" customClass="RRSidePanelController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q2g-0a-h0A"/>
+                        <viewControllerLayoutGuide type="bottom" id="E4a-5F-KjR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1J3-Lq-BGh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="vQ8-mg-NMg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5nb-B2-anJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="166" y="192"/>
+        </scene>
+        <!--Table View Controller - Reddit Reader-->
+        <scene sceneID="NOI-bT-gyw">
+            <objects>
+                <tableViewController storyboardIdentifier="centerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZpR-Il-Gva" customClass="RRTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZOO-4G-7Se">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="5bV-Bh-zEH">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ygm-uI-fmj">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ygm-uI-fmj" id="REq-wf-T3i">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJS-oc-s72">
+                                            <rect key="frame" x="19" y="8" width="283" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Hot"/>
+                                                <segment title="Top"/>
+                                                <segment title="Favorites"/>
+                                                <segment title="Etc"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="360" verticalHuggingPriority="470" horizontalCompressionResistancePriority="525" verticalCompressionResistancePriority="547" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyIdentifier" rowHeight="105" id="uiE-Nw-PE4" customClass="RRReditEntryCellView">
-                                <rect key="frame" x="0.0" y="86" width="320" height="105"/>
+                                <rect key="frame" x="0.0" y="110" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uiE-Nw-PE4" id="wAJ-Qc-3CO">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="104"/>
@@ -64,10 +136,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reddit Reader" id="81T-ys-NVZ"/>
+                    <connections>
+                        <outlet property="redditSearchBar" destination="5bV-Bh-zEH" id="pxK-tX-Dw0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VdP-vK-Kvq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="gRk-Mg-QKz">
+                    <rect key="frame" x="0.0" y="0.0" width="161" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                </segmentedControl>
             </objects>
-            <point key="canvasLocation" x="369" y="-165"/>
+            <point key="canvasLocation" x="527" y="-481"/>
         </scene>
         <!--Reddit Post Detail View Controller - Reddit Detail-->
         <scene sceneID="fpy-Fg-8V5">
@@ -79,7 +162,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="360" verticalHuggingPriority="470" horizontalCompressionResistancePriority="525" verticalCompressionResistancePriority="547" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyIdentifier" rowHeight="105" id="5ED-qc-ZQc" customClass="RRReditEntryCellView">
-                                <rect key="frame" x="0.0" y="86" width="320" height="105"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ED-qc-ZQc" id="bud-B6-VWL">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
@@ -120,7 +203,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="5" shouldIndentWhileEditing="NO" reuseIdentifier="commentCell" rowHeight="56" id="xV4-wm-Pgh" customClass="RReditCommentsCellView">
-                                <rect key="frame" x="0.0" y="191" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="127" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xV4-wm-Pgh" id="QFr-N2-ZW6">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -187,7 +270,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAs-QA-qZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="-165"/>
+            <point key="canvasLocation" x="1118" y="-411"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bd6-18-djd">
@@ -200,12 +283,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ZpR-Il-Gva" kind="relationship" relationship="rootViewController" id="Z8r-Qn-AIs"/>
+                        <segue destination="42H-fn-fQj" kind="relationship" relationship="rootViewController" id="hJT-OW-IZS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSp-RZ-Q1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-123" y="-165"/>
+            <point key="canvasLocation" x="-531" y="-135"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

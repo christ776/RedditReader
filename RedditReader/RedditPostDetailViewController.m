@@ -105,10 +105,6 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
         RRReditComment  *redditCommnent = [self.comments objectAtIndex:indexPath.row -1];
          cell.redditCommentsLabel.text = redditCommnent.body;
         
-        // force layout
-//        [cell setNeedsLayout];
-//        [cell layoutIfNeeded];
-        
         height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         return height;
     }

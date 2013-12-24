@@ -39,15 +39,17 @@
     return self;
 }
 
-- (void)getPath:(NSString *)path
-     parameters:(NSDictionary *)parameters
+- (void)getPath:(NSString *)path parameters:(NSDictionary *)parameters
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
-    [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
-    [self enqueueHTTPRequestOperation:operation];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
+        [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
+        AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+        [self enqueueHTTPRequestOperation:operation];
+    });
 }
 
 - (void)postPath:(NSString *)path
@@ -87,7 +89,6 @@
                                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    dispatch_queue_t backgroundQueue = dispatch_queue_create("com.name.bgqueue", NULL);
     AFHTTPRequestOperation *operation = [super HTTPRequestOperationWithRequest:urlRequest success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (error.code == kCFURLErrorNotConnectedToInternet) {
             NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:urlRequest];

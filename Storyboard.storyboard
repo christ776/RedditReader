@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gF7-KY-OQ1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="gF7-KY-OQ1">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -33,7 +33,7 @@
             </objects>
             <point key="canvasLocation" x="-60" y="-641"/>
         </scene>
-        <!--Side Panel Controller-->
+        <!--Side Panel Controller - Reddit Reader-->
         <scene sceneID="Vhe-oH-O7e">
             <objects>
                 <viewController id="42H-fn-fQj" customClass="RRSidePanelController" sceneMemberID="viewController">
@@ -42,11 +42,12 @@
                         <viewControllerLayoutGuide type="bottom" id="E4a-5F-KjR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1J3-Lq-BGh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vQ8-mg-NMg"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Reddit Reader" id="vQ8-mg-NMg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5nb-B2-anJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,32 +61,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="5bV-Bh-zEH">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="XhB-qB-Iks">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5bV-Bh-zEH">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="ZpR-Il-Gva" id="PMg-kv-aJL"/>
+                                    </connections>
+                                </searchBar>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="pJS-oc-s72">
+                                    <rect key="frame" x="20" y="53" width="280" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="Hot"/>
+                                        <segment title="Top"/>
+                                        <segment title="Favorites"/>
+                                        <segment title="Etc"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="sortingFilterValueChanged:" destination="ZpR-Il-Gva" eventType="valueChanged" id="Wmo-IB-oLW"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ygm-uI-fmj">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ygm-uI-fmj" id="REq-wf-T3i">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJS-oc-s72">
-                                            <rect key="frame" x="19" y="8" width="283" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <segments>
-                                                <segment title="Hot"/>
-                                                <segment title="Top"/>
-                                                <segment title="Favorites"/>
-                                                <segment title="Etc"/>
-                                            </segments>
-                                        </segmentedControl>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="360" verticalHuggingPriority="470" horizontalCompressionResistancePriority="525" verticalCompressionResistancePriority="547" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyIdentifier" rowHeight="105" id="uiE-Nw-PE4" customClass="RRReditEntryCellView">
                                 <rect key="frame" x="0.0" y="110" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,6 +141,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Reddit Reader" id="81T-ys-NVZ"/>
                     <connections>
+                        <outlet property="filteredSortingControl" destination="pJS-oc-s72" id="aps-3I-svr"/>
                         <outlet property="redditSearchBar" destination="5bV-Bh-zEH" id="pxK-tX-Dw0"/>
                     </connections>
                 </tableViewController>
@@ -215,12 +220,12 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="dVe-6W-XZx" userLabel="Height - (≥28) - Label - comments"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="13"/>
                                             <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzI-aR-t1y">
-                                            <rect key="frame" x="20" y="5" width="100" height="15"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzI-aR-t1y">
+                                            <rect key="frame" x="10" y="5" width="100" height="15"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="gaF-UJ-G5K"/>

@@ -7,6 +7,8 @@
 //
 
 #import "RRSidePanelController.h"
+#import "UIImageView+WebCache.h"
+#import "RRSubReddit.h"
 
 @interface RRSidePanelController ()
 
@@ -14,25 +16,55 @@
 
 @implementation RRSidePanelController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+-(id) initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeLeftPanel) name:@"closeLeftPanel" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subRedditHasChanged:) name:@"SubRedditChange" object:nil];
     }
     return self;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"closeLeftPanel" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SubRedditChange" object:nil];
+}
+
+-(void) closeLeftPanel {
+    [self toggleLeftPanel:nil];
+}
+
+-(void) subRedditHasChanged:(NSNotification*) notification {
+    
+    RRSubReddit *subReddit = [notification.userInfo objectForKey:@"subreddit"];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    
+    if (![subReddit.thumbnailURLString isEqual:[NSNull null]]) {
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:subReddit.thumbnailURLString]];
+        UIImageView *titleView =  [[UIImageView alloc] initWithImage:[UIImage imageWithData:imageData]];
+        [headerView addSubview:titleView];
+    }
+    
+     UIFont * titleFont = [UIFont systemFontOfSize:17.];
+    CGSize textSize = [subReddit.title sizeWithFont:titleFont];
+    
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, textSize.width, textSize.height)];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleLabel setBackgroundColor:[UIColor clearColor]];
+    [titleLabel setFont:titleFont];
+    [titleLabel setText:subReddit.title];
+    [headerView addSubview:titleLabel];
+    
+    self.navigationItem.titleView = headerView;
+    
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void) awakeFromNib

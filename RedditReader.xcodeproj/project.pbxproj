@@ -66,6 +66,7 @@
 		31BB8FDB17C974C600F86D87 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BB8FDA17C974C600F86D87 /* MapKit.framework */; };
 		31BB8FDF17C9763400F86D87 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 31BB8FDE17C9763400F86D87 /* placeholder.jpg */; };
 		31CF0229186944D20053AEC6 /* RRSubReddit.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CF0228186944D20053AEC6 /* RRSubReddit.m */; };
+		31EF871B186F74CF00649EB5 /* RRSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EF871A186F74CF00649EB5 /* RRSearchController.m */; };
 		31F9DD3A181DD8D80046090A /* RReditCommentsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F9DD39181DD8D80046090A /* RReditCommentsCellView.m */; };
 		31FBDFDF1813637E005BC356 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31FBDFDE1813637E005BC356 /* Storyboard.storyboard */; };
 		31FBDFE418139B6B005BC356 /* RedditPostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FBDFE318139B6B005BC356 /* RedditPostDetailViewController.m */; };
@@ -176,6 +177,8 @@
 		31BB8FDE17C9763400F86D87 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = placeholder.jpg; path = Resources/images/placeholder.jpg; sourceTree = "<group>"; };
 		31CF0227186944D20053AEC6 /* RRSubReddit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSubReddit.h; path = Classes/RRSubReddit.h; sourceTree = "<group>"; };
 		31CF0228186944D20053AEC6 /* RRSubReddit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSubReddit.m; path = Classes/RRSubReddit.m; sourceTree = "<group>"; };
+		31EF8719186F74CF00649EB5 /* RRSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSearchController.h; path = Classes/RRSearchController.h; sourceTree = "<group>"; };
+		31EF871A186F74CF00649EB5 /* RRSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSearchController.m; path = Classes/RRSearchController.m; sourceTree = "<group>"; };
 		31F9DD38181DD8D80046090A /* RReditCommentsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RReditCommentsCellView.h; sourceTree = "<group>"; };
 		31F9DD39181DD8D80046090A /* RReditCommentsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RReditCommentsCellView.m; sourceTree = "<group>"; };
 		31FBDFDE1813637E005BC356 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = ../Storyboard.storyboard; sourceTree = "<group>"; };
@@ -434,9 +437,19 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		31EF8718186F742D00649EB5 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				31EF8719186F74CF00649EB5 /* RRSearchController.h */,
+				31EF871A186F74CF00649EB5 /* RRSearchController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		31FBDFE118139B2E005BC356 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				31EF8718186F742D00649EB5 /* Search */,
 				313874B2186653B1009B3355 /* leftSideController */,
 				313874A818665164009B3355 /* SideController */,
 				3107931C18539687001C19C6 /* MHFacebookImageViewer.h */,
@@ -554,6 +567,7 @@
 				3173C8C217CC4C7F001734CF /* AFHTTPRequestOperation.m in Sources */,
 				3173C8C417CC4C7F001734CF /* AFImageRequestOperation.m in Sources */,
 				3173C8C617CC4C7F001734CF /* AFJSONRequestOperation.m in Sources */,
+				31EF871B186F74CF00649EB5 /* RRSearchController.m in Sources */,
 				3173C8C817CC4C7F001734CF /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3173C8CA17CC4C7F001734CF /* AFPropertyListRequestOperation.m in Sources */,
 				313874B1186651BC009B3355 /* RRSidePanelController.m in Sources */,

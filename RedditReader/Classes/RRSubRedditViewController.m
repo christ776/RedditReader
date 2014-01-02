@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
     [[RRStore sharedStore] fetchSubRedditsWithCompletionBlock:^(NSArray *result) {
         self.subreddits = result;
@@ -58,11 +59,19 @@
     
     RRSubReddit *subReddit = [self.subreddits objectAtIndex:indexPath.row];
     cell.textLabel.text = subReddit.title;
-    if (subReddit.thumbnailURLString) {
-      [cell.imageView setImageWithURL:[NSURL URLWithString:subReddit.thumbnailURLString]];
+    if (![subReddit.thumbnailURLString isEqual:[NSNull null]]) {
+        [cell.imageView setImageWithURL:[NSURL URLWithString:subReddit.thumbnailURLString]];
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    RRSubReddit *subReddit = [self.subreddits objectAtIndex:indexPath.row];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SubRedditChange" object:nil
+                                                      userInfo:@{@"subreddit":subReddit}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"closeLeftPanel" object:nil];
 }
 
 

@@ -30,6 +30,26 @@
     return sharedInstance;
 }
 
+-(void) fetchRedditFeedWithSorting:(RedditSorting) sorting inSubReddit:(NSString*) subReddit withCompletionBlock: (void (^) (NSArray* result)) success failure:(void (^)(NSError *error)) failureblock {
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@r/%@/%@",REDDIT_BASE_URL, subReddit,TOP_REDDITS];
+    
+    [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+           NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
+           success(reddits);
+       });
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failureblock(error);
+        
+    }];
+    
+}
+
+
 - (void)fetchRedditFeed: (RedditRequestType) redditRequestType withCompletion:(void (^)(NSArray *obj, NSError *err))block {
     
     NSString *urlString = nil;
@@ -52,23 +72,17 @@
             break;
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-           // DLog(@"Did finished loading data %@ ",responseObject);
-            NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
-            
-            if (block) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
                 block(reddits, nil);
-            }
+            });
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
-            if (block) {
-                block(nil,error);
-            }
+            block(nil,error);
         }];
-    });
 }
 
 - (void)fetchRepliesForPost: (NSString*) redditId withCompletion:(void (^)(NSArray *obj, NSError *err))block {
@@ -79,26 +93,45 @@
         
         [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            //DLog(@"Did finished loading data %@ ",responseObject);
-            NSArray* reddits =  [[JSONParser sharedInstance] parseComments:[responseObject lastObject] withDepth:0];
-            
-            block(reddits, nil);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSArray* reddits =  [[JSONParser sharedInstance] parseComments:[responseObject lastObject] withDepth:0];
+                
+                block(reddits, nil);
+            });
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
-            if (block) {
-                block(nil,error);
-            }
+            block(nil,error);
         }];
     });
 }
 
+#pragma Fetch Subreddits
 - (void)fetchSubRedditsWithCompletionBlock: (void (^) (NSArray* result)) success failure:(void (^)(NSError *error)) failureblock {
     
     [[RRHTTPClient sharedClient] getPath:TOP_SUBREDDITS parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray* reddits =  [[JSONParser sharedInstance] parseSubReddits:responseObject];
+            success(reddits);
+        });
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failureblock(error);
+    }];
+}
+
+#pragma Search for a given string in a subreddit
+
+-(void) searchForRedditsMatchingKeyworkd:(NSString*) keyword inSubReddit:(NSString*) subreddit withSorting:(RedditSorting) sorting withCompletionBlock: (void (^) (NSArray* result)) success failure:(void (^)(NSError *error)) failureblock {
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@r/%@/%@%@&%@",REDDIT_BASE_URL, subreddit,SEARCH,keyword,LIMIT_RESULTS_25];
+    
+    [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
             success(reddits);
         });
         

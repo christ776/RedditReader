@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "NSDate+FormattingUtils.h"
 #import "RedditPostDetailViewController.h"
+#import "RRSubReddit.h"
 
 @interface RRTableViewController ()
 
@@ -26,42 +27,55 @@
 
 @implementation RRTableViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.entries = [NSMutableArray array];
-        self.cellHeights = [NSMutableArray array];
-    }
-    return self;
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.entries = [NSMutableArray array];
         self.cellHeights = [NSMutableArray array];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subredditChanged:)
+                                                     name:@"SubRedditChange" object:nil];
     }
     return self;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        self.entries = [NSMutableArray array];
-        self.cellHeights = [NSMutableArray array];
-    }
-    return self;
+
+-(void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SubRedditChange" object:nil];
+}
+
+-(void) subredditChanged:(NSNotification*) notification {
+    
+    RRSubReddit *subReddit = [notification.userInfo objectForKey:@"subreddit"];
+    
+    [[RRStore sharedStore] fetchRedditFeedWithSorting:TOP inSubReddit:subReddit.title withCompletionBlock:^(NSArray *result) {
+        
+        [self.entries removeAllObjects];
+        // If everything went ok reload the table.
+        [self.entries addObjectsFromArray:result];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            [self.tableView reloadData];
+        });
+        
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // If things went bad, show an alert view
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                               message:error.description
+                               delegate:nil
+                               cancelButtonTitle:@"OK"
+                               otherButtonTitles:nil];
+            [av show];
+        });
+    }];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-   // [self.tableView registerNib:[UINib nibWithNibName:@"RedditEntryCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
-    
+
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [self.refreshControl addTarget:self
@@ -105,12 +119,6 @@
     else
     {
         cell.thumbnailView.contentMode = UIViewContentModeScaleAspectFill;
-        
-        [cell.thumbnailView setupImageViewerWithDatasource:self initialIndex:indexPath.row onOpen:^{
-            DLog(@"OPEN!");
-        } onClose:^{
-            DLog(@"CLOSE!");
-        }];
     }
     
     return cell;
@@ -216,26 +224,25 @@
     [[RRStore sharedStore] fetchRedditFeed:requestType withCompletion:^(NSArray *obj, NSError *err) {
         
         // When the request completes, this block will be called.
-        
-        if (!err) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!err) {
 
-            NSMutableArray *indexPaths = [NSMutableArray array];
-            int currentAmountOfEntries = self.entries.count;
-            for(int i= currentAmountOfEntries; i < obj.count + currentAmountOfEntries; i++)
-            {
-                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-    
-            }
-            
-            // If everything went ok reload the table.
-            [self.entries addObjectsFromArray:obj];
-            
+                NSMutableArray *indexPaths = [NSMutableArray array];
+                int currentAmountOfEntries = self.entries.count;
+                for(int i= currentAmountOfEntries; i < obj.count + currentAmountOfEntries; i++)
+                {
+                    [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+        
+                }
+                
+                // If everything went ok reload the table.
+                [self.entries addObjectsFromArray:obj];
                 [self.tableView beginUpdates];
                 [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
                 [self.tableView endUpdates];
             
-        } else {
-            
+        } else
+        {
             // If things went bad, show an alert view
             UIAlertView *av = [[UIAlertView alloc]
                                initWithTitle:@"Error"
@@ -245,8 +252,6 @@
                                otherButtonTitles:nil];
             [av show];
         }
-        
-         dispatch_async(dispatch_get_main_queue(), ^{
         
             [self.activityIndicator stopAnimating];
         });
@@ -282,19 +287,51 @@
     return formatter;
 }
 
-#pragma FacebookImageViewer delegate methods
-- (NSInteger) numberImagesForImageViewer:(MHFacebookImageViewer *)imageViewer {
-    return 1;
+#pragma UISearchBar Delegate methods
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.redditSearchBar resignFirstResponder];
+    [self.view endEditing:YES];
+    
+    [[RRStore sharedStore] searchForRedditsMatchingKeyworkd:self.redditSearchBar.text inSubReddit:@"funny" withSorting:TOP withCompletionBlock:^(NSArray *result) {
+        
+        [self.entries removeAllObjects];
+        // If everything went ok reload the table.
+        [self.entries addObjectsFromArray:result];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+        });
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // If things went bad, show an alert view
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:error.description
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+        });
+    }];
 }
 
--  (NSURL*) imageURLAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer {
-    RRReditEntry *redditEntry = [self.entries objectAtIndex:index];
-    return redditEntry.url;
-}
+//- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
+//{
+//    return UIBarPositionTopAttached;
+//}
 
-- (UIImage*) imageDefaultAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer{
-   
-    return [UIImage imageNamed:@"placeholder.jpg"];
+- (IBAction)sortingFilterValueChanged:(id)sender {
+    
+    switch (self.filteredSortingControl.selectedSegmentIndex) {
+        case 0:
+            NSLog(@"5d selected. Index: %d", self.filteredSortingControl.selectedSegmentIndex);
+            break;
+        case 1:
+            [self.filteredSortingControl setSelectedSegmentIndex:1];
+            break;
+        default:
+            break;
+    }
+    
 }
-
 @end

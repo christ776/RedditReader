@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MHFacebookImageViewer.h"
 
-@interface RRTableViewController : UITableViewController <MHFacebookImageViewerDatasource,UIGestureRecognizerDelegate>
+@interface RRTableViewController : UITableViewController <UISearchDisplayDelegate,UISearchBarDelegate,UIGestureRecognizerDelegate>
+@property (strong, nonatomic) IBOutlet UISegmentedControl *filteredSortingControl;
 
 @property (strong, nonatomic) IBOutlet UISearchBar *redditSearchBar;
+- (IBAction)sortingFilterValueChanged:(id)sender;
 @end

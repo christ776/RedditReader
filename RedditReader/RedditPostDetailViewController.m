@@ -54,20 +54,24 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
             // If everything went ok reload the table.
             [self.comments addObjectsFromArray:obj];
             
-            [self.tableView beginUpdates];
-            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
-            [self.tableView endUpdates];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView beginUpdates];
+                [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+                [self.tableView endUpdates];
+            });
             
         } else {
             
-            // If things went bad, show an alert view
-            UIAlertView *av = [[UIAlertView alloc]
-                               initWithTitle:@"Error"
-                               message:[err localizedDescription]
-                               delegate:nil
-                               cancelButtonTitle:@"OK"
-                               otherButtonTitles:nil];
-            [av show];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // If things went bad, show an alert view
+                UIAlertView *av = [[UIAlertView alloc]
+                                   initWithTitle:@"Error"
+                                   message:[err localizedDescription]
+                                   delegate:nil
+                                   cancelButtonTitle:@"OK"
+                                   otherButtonTitles:nil];
+                [av show];
+            });
         }
     }];
 }

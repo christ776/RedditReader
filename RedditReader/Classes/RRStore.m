@@ -33,10 +33,13 @@
 -(void) fetchRedditFeedWithSorting:(RedditSorting) sorting inSubReddit:(NSString*) subReddit withCompletionBlock: (void (^) (NSArray* result)) success failure:(void (^)(NSError *error)) failureblock {
     
     NSString *urlString = [NSString stringWithFormat:@"%@r/%@/%@",REDDIT_BASE_URL, subReddit,TOP_REDDITS];
+    __weak RRStore *bself = self;
     
     [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+           
+           bself.currentSubReddit = subReddit;
            NSArray* reddits =  [[JSONParser sharedInstance] parseReddits:responseObject];
            success(reddits);
        });
@@ -89,8 +92,8 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *urlString = [NSString stringWithFormat:COMMENTS_FOR_REDDIT, redditId];
-        
+        NSString *urlString = [NSString stringWithFormat:@"%@%@.json?&%@",COMMENTS_FOR_REDDIT,redditId,LIMIT_RESULTS_50];
+    
         [[RRHTTPClient sharedClient] getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

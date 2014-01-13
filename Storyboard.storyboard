@@ -115,6 +115,21 @@
                                                 <constraint firstAttribute="height" constant="60" id="qV3-DK-fa9"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBJ-mL-deE">
+                                            <rect key="frame" x="10" y="21" width="60" height="60"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="4zo-yO-7o1"/>
+                                                <constraint firstAttribute="height" constant="60" id="wVx-0m-FFD"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="zooThumbnail:" destination="ZpR-Il-Gva" eventType="touchUpInside" id="fJH-5X-g7q"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="cKe-7b-nDR" secondAttribute="trailing" constant="-6" id="OBt-nc-Z7e"/>
@@ -143,6 +158,7 @@
                     <connections>
                         <outlet property="filteredSortingControl" destination="pJS-oc-s72" id="aps-3I-svr"/>
                         <outlet property="redditSearchBar" destination="5bV-Bh-zEH" id="pxK-tX-Dw0"/>
+                        <segue destination="XDl-YR-9mv" kind="push" identifier="searchResults" id="HlT-RC-8MN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VdP-vK-Kvq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -155,7 +171,71 @@
                     </segments>
                 </segmentedControl>
             </objects>
-            <point key="canvasLocation" x="527" y="-481"/>
+            <point key="canvasLocation" x="345" y="-631"/>
+        </scene>
+        <!--Search Results View Controller-->
+        <scene sceneID="fHT-7j-muN">
+            <objects>
+                <tableViewController storyboardIdentifier="searchResults" id="XDl-YR-9mv" customClass="RRSearchResultsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eA7-1e-Q4C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" horizontalHuggingPriority="360" verticalHuggingPriority="470" horizontalCompressionResistancePriority="525" verticalCompressionResistancePriority="547" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MyIdentifier" rowHeight="105" id="5Tf-ak-0g1" customClass="RRReditEntryCellView">
+                                <rect key="frame" x="0.0" y="22" width="320" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Tf-ak-0g1" id="COk-9S-FLX">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="104"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="454" verticalHuggingPriority="516" horizontalCompressionResistancePriority="470" verticalCompressionResistancePriority="454" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="215" translatesAutoresizingMaskIntoConstraints="NO" id="PC2-Hw-L3y">
+                                            <rect key="frame" x="78" y="4" width="215" height="89"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="89" id="qnO-s9-8sm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xss-r3-ecY">
+                                            <rect key="frame" x="10" y="23" width="60" height="60"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="MFu-WW-5Oo"/>
+                                                <constraint firstAttribute="width" constant="60" id="RAR-CY-eKO"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="PC2-Hw-L3y" firstAttribute="leading" secondItem="Xss-r3-ecY" secondAttribute="trailing" constant="8" symbolic="YES" id="2Im-qS-sfF"/>
+                                        <constraint firstAttribute="trailing" secondItem="PC2-Hw-L3y" secondAttribute="trailing" constant="-6" id="vRm-Xg-G6E"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="PC2-Hw-L3y" firstAttribute="top" secondItem="5Tf-ak-0g1" secondAttribute="top" constant="4" id="HFz-FW-V4k"/>
+                                    <constraint firstItem="Xss-r3-ecY" firstAttribute="leading" secondItem="5Tf-ak-0g1" secondAttribute="leading" constant="10" id="OlO-GS-7Cu"/>
+                                    <constraint firstItem="Xss-r3-ecY" firstAttribute="centerY" secondItem="5Tf-ak-0g1" secondAttribute="centerY" id="SYl-b6-jeb"/>
+                                    <constraint firstAttribute="bottom" secondItem="PC2-Hw-L3y" secondAttribute="bottom" priority="225" constant="12" id="toL-4o-j3e"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="thumbnailView" destination="Xss-r3-ecY" id="etA-Po-HIS"/>
+                                    <outlet property="titleLabel" destination="PC2-Hw-L3y" id="swf-au-4ES"/>
+                                    <segue destination="PBY-lU-Imy" kind="push" identifier="RedditDetail" id="Lca-pI-0pP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XDl-YR-9mv" id="3Ne-Sx-Rrr"/>
+                            <outlet property="delegate" destination="XDl-YR-9mv" id="OKi-1E-fff"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="gZJ-6G-EvK"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q8o-q1-iGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1011" y="-1222"/>
         </scene>
         <!--Reddit Post Detail View Controller - Reddit Detail-->
         <scene sceneID="fpy-Fg-8V5">
@@ -301,4 +381,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="jjY-yV-9Ax"/>
+    </inferredMetricsTieBreakers>
 </document>

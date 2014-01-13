@@ -17,11 +17,12 @@
 
 #define REDDIT_BASE_URL @"http://www.reddit.com/"
 #define TOP_REDDITS @"top.json"
-#define COMMENTS_FOR_REDDIT @"comments/%@.json"
+#define COMMENTS_FOR_REDDIT @"comments/"
 #define TOP_SUBREDDITS @"subreddits/popular.json"
 #define SEARCH @"search.json?q="
 
 #define LIMIT_RESULTS_25 @"limit=25"
+#define LIMIT_RESULTS_50 @"limit=50"
 
 typedef NS_ENUM (NSInteger,RedditSorting) {RELEVANCE, NEW, HOT, TOP, COMMENTS};
 

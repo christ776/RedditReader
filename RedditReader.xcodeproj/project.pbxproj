@@ -65,7 +65,11 @@
 		31BB8FD917C973D900F86D87 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BB8FCB17C973D900F86D87 /* UIImageView+WebCache.m */; };
 		31BB8FDB17C974C600F86D87 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BB8FDA17C974C600F86D87 /* MapKit.framework */; };
 		31BB8FDF17C9763400F86D87 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 31BB8FDE17C9763400F86D87 /* placeholder.jpg */; };
+		31C69908187E58B4004BFDF5 /* EXPhotoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 31C69906187E58B4004BFDF5 /* EXPhotoViewer.m */; };
+		31C69909187E58B4004BFDF5 /* EXPhotoViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C69907187E58B4004BFDF5 /* EXPhotoViewer.xib */; };
+		31C6990E187E6018004BFDF5 /* UIView+EasyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 31C6990D187E6018004BFDF5 /* UIView+EasyFrame.m */; };
 		31CF0229186944D20053AEC6 /* RRSubReddit.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CF0228186944D20053AEC6 /* RRSubReddit.m */; };
+		31D214991878BD1E007E2738 /* RRSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31D214981878BD1E007E2738 /* RRSearchResultsViewController.m */; };
 		31EF871B186F74CF00649EB5 /* RRSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EF871A186F74CF00649EB5 /* RRSearchController.m */; };
 		31F9DD3A181DD8D80046090A /* RReditCommentsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F9DD39181DD8D80046090A /* RReditCommentsCellView.m */; };
 		31FBDFDF1813637E005BC356 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31FBDFDE1813637E005BC356 /* Storyboard.storyboard */; };
@@ -175,8 +179,15 @@
 		31BB8FCB17C973D900F86D87 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		31BB8FDA17C974C600F86D87 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		31BB8FDE17C9763400F86D87 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = placeholder.jpg; path = Resources/images/placeholder.jpg; sourceTree = "<group>"; };
+		31C69905187E58B4004BFDF5 /* EXPhotoViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPhotoViewer.h; sourceTree = "<group>"; };
+		31C69906187E58B4004BFDF5 /* EXPhotoViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXPhotoViewer.m; sourceTree = "<group>"; };
+		31C69907187E58B4004BFDF5 /* EXPhotoViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EXPhotoViewer.xib; sourceTree = "<group>"; };
+		31C6990C187E6018004BFDF5 /* UIView+EasyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasyFrame.h"; sourceTree = "<group>"; };
+		31C6990D187E6018004BFDF5 /* UIView+EasyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasyFrame.m"; sourceTree = "<group>"; };
 		31CF0227186944D20053AEC6 /* RRSubReddit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSubReddit.h; path = Classes/RRSubReddit.h; sourceTree = "<group>"; };
 		31CF0228186944D20053AEC6 /* RRSubReddit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSubReddit.m; path = Classes/RRSubReddit.m; sourceTree = "<group>"; };
+		31D214971878BD1E007E2738 /* RRSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSearchResultsViewController.h; path = Classes/RRSearchResultsViewController.h; sourceTree = "<group>"; };
+		31D214981878BD1E007E2738 /* RRSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSearchResultsViewController.m; path = Classes/RRSearchResultsViewController.m; sourceTree = "<group>"; };
 		31EF8719186F74CF00649EB5 /* RRSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRSearchController.h; path = Classes/RRSearchController.h; sourceTree = "<group>"; };
 		31EF871A186F74CF00649EB5 /* RRSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRSearchController.m; path = Classes/RRSearchController.m; sourceTree = "<group>"; };
 		31F9DD38181DD8D80046090A /* RReditCommentsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RReditCommentsCellView.h; sourceTree = "<group>"; };
@@ -211,6 +222,7 @@
 		31215DBF17C8EAC800B0F878 = {
 			isa = PBXGroup;
 			children = (
+				31C6990A187E6007004BFDF5 /* Categories */,
 				31215DD117C8EAC800B0F878 /* RedditReader */,
 				31215DCA17C8EAC800B0F878 /* Frameworks */,
 				31215DC917C8EAC800B0F878 /* Products */,
@@ -247,6 +259,7 @@
 		31215DD117C8EAC800B0F878 /* RedditReader */ = {
 			isa = PBXGroup;
 			children = (
+				31C69904187E58B4004BFDF5 /* EXPhotoViewer */,
 				31FBDFE118139B2E005BC356 /* Controllers */,
 				31FBDFDE1813637E005BC356 /* Storyboard.storyboard */,
 				3173C8D817CC5503001734CF /* HTTP */,
@@ -437,11 +450,40 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		31C69904187E58B4004BFDF5 /* EXPhotoViewer */ = {
+			isa = PBXGroup;
+			children = (
+				31C69905187E58B4004BFDF5 /* EXPhotoViewer.h */,
+				31C69906187E58B4004BFDF5 /* EXPhotoViewer.m */,
+				31C69907187E58B4004BFDF5 /* EXPhotoViewer.xib */,
+			);
+			path = EXPhotoViewer;
+			sourceTree = "<group>";
+		};
+		31C6990A187E6007004BFDF5 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				31C6990B187E6018004BFDF5 /* UIView+EasyFrame */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		31C6990B187E6018004BFDF5 /* UIView+EasyFrame */ = {
+			isa = PBXGroup;
+			children = (
+				31C6990C187E6018004BFDF5 /* UIView+EasyFrame.h */,
+				31C6990D187E6018004BFDF5 /* UIView+EasyFrame.m */,
+			);
+			path = "UIView+EasyFrame";
+			sourceTree = "<group>";
+		};
 		31EF8718186F742D00649EB5 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				31EF8719186F74CF00649EB5 /* RRSearchController.h */,
 				31EF871A186F74CF00649EB5 /* RRSearchController.m */,
+				31D214971878BD1E007E2738 /* RRSearchResultsViewController.h */,
+				31D214981878BD1E007E2738 /* RRSearchResultsViewController.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -524,6 +566,7 @@
 				3173C8DF17CC6506001734CF /* speechbubbles.png in Resources */,
 				3173C8E017CC6506001734CF /* speechbubbles@2x.png in Resources */,
 				3173C8E317CC654D001734CF /* timer.png in Resources */,
+				31C69909187E58B4004BFDF5 /* EXPhotoViewer.xib in Resources */,
 				3173C8E417CC654D001734CF /* timer@2x.png in Resources */,
 				31FBDFDF1813637E005BC356 /* Storyboard.storyboard in Resources */,
 			);
@@ -539,6 +582,7 @@
 				31215DD817C8EAC800B0F878 /* main.m in Sources */,
 				31215DDC17C8EAC800B0F878 /* AppDelegate.m in Sources */,
 				31215E0A17C90D5F00B0F878 /* RRStore.m in Sources */,
+				31C69908187E58B4004BFDF5 /* EXPhotoViewer.m in Sources */,
 				31215E1317C91C6600B0F878 /* RRReditEntry.m in Sources */,
 				31215E1B17C9218800B0F878 /* RRReditEntryCellView.m in Sources */,
 				313874AE1866517A009B3355 /* UIViewController+JASidePanel.m in Sources */,
@@ -553,6 +597,7 @@
 				31F9DD3A181DD8D80046090A /* RReditCommentsCellView.m in Sources */,
 				31BB8FD117C973D900F86D87 /* SDWebImageDownloader.m in Sources */,
 				31BB8FD217C973D900F86D87 /* SDWebImageDownloaderOperation.m in Sources */,
+				31D214991878BD1E007E2738 /* RRSearchResultsViewController.m in Sources */,
 				3107931E18539687001C19C6 /* MHFacebookImageViewer.m in Sources */,
 				31BB8FD317C973D900F86D87 /* SDWebImageManager.m in Sources */,
 				31BB8FD417C973D900F86D87 /* SDWebImagePrefetcher.m in Sources */,
@@ -576,6 +621,7 @@
 				3173C8D017CC4C7F001734CF /* UIImageView+AFNetworking.m in Sources */,
 				3173C8DB17CC5542001734CF /* RRHTTPClient.m in Sources */,
 				31FBDFE418139B6B005BC356 /* RedditPostDetailViewController.m in Sources */,
+				31C6990E187E6018004BFDF5 /* UIView+EasyFrame.m in Sources */,
 				31FBDFE71814751C005BC356 /* RRReditComment.m in Sources */,
 				313874B5186653DA009B3355 /* RRSubRedditViewController.m in Sources */,
 			);

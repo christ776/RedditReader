@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *titleLabelHeightConstraint;
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic,unsafe_unretained) id<UIGestureRecognizerDelegate> delegate;
 @end

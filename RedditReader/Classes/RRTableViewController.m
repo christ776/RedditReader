@@ -16,6 +16,8 @@
 #import "NSDate+FormattingUtils.h"
 #import "RedditPostDetailViewController.h"
 #import "RRSubReddit.h"
+#import "RRSearchResultsViewController.h"
+#import "EXPhotoViewer.h"
 
 @interface RRTableViewController ()
 
@@ -104,24 +106,17 @@
     // Here we use the new provided setImageWithURL: method to load the web image
     [cell.thumbnailView setImageWithURL:[NSURL URLWithString:redditEntry.thumbnailURLString]
                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    
     cell.commentsLabel.text = [redditEntry.num_comments stringValue];
     cell.creationTimeLabel.text = [NSDate displaytimeInterval:[redditEntry.creationDate timeIntervalSinceNow]];
-    //[cell setNeedsUpdateConstraints];
-    
-    if ([redditEntry.type isEqualToString:@"youtube.com"]) {
-        
-        UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]
-                                         initWithTarget:self action:@selector(handlePinch:)];
-        pgr.delegate = self;
-        [cell.thumbnailView addGestureRecognizer:pgr];
-       
-    }
-    else
-    {
-        cell.thumbnailView.contentMode = UIViewContentModeScaleAspectFill;
-    }
+    cell.delegate = self;
     
     return cell;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ![NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"];
 }
 
 - (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer
@@ -191,6 +186,37 @@
 		detailViewController.redditEntry =  [self.entries objectAtIndex:[ self.tableView indexPathForSelectedRow].row];
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 	}
+    if ([segue.identifier isEqualToString:@"searchResults"])
+	{
+		RRSearchResultsViewController *searchResultsController = segue.destinationViewController;
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+        
+        __weak RRTableViewController *bself = self;
+        [[RRStore sharedStore] searchForRedditsMatchingKeyworkd:self.redditSearchBar.text inSubReddit:[RRStore sharedStore].currentSubReddit withSorting:TOP withCompletionBlock:^(NSArray *result) {
+
+            [searchResultsController.searchresults removeAllObjects];
+            // If everything went ok reload the table.
+            [searchResultsController.searchresults addObjectsFromArray:result];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                [searchResultsController.tableView reloadData];
+                searchResultsController.title = bself.redditSearchBar.text;  
+            });
+        } failure:^(NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // If things went bad, show an alert view
+                UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                             message:error.description
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+                [av show];
+            });
+        }];
+        
+	}
+    
 }
 
 -(void)setupTableViewFooter
@@ -292,33 +318,9 @@
     [self.redditSearchBar resignFirstResponder];
     [self.view endEditing:YES];
     
-    [[RRStore sharedStore] searchForRedditsMatchingKeyworkd:self.redditSearchBar.text inSubReddit:@"funny" withSorting:TOP withCompletionBlock:^(NSArray *result) {
-        
-        [self.entries removeAllObjects];
-        // If everything went ok reload the table.
-        [self.entries addObjectsFromArray:result];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self.tableView reloadData];
-        });
-    } failure:^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // If things went bad, show an alert view
-            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                         message:error.description
-                                                        delegate:nil
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
-            [av show];
-        });
-    }];
-}
+    [self performSegueWithIdentifier:@"searchResults" sender:self];
 
-//- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
-//{
-//    return UIBarPositionTopAttached;
-//}
+}
 
 - (IBAction)sortingFilterValueChanged:(id)sender {
     
@@ -333,5 +335,42 @@
             break;
     }
     
+}
+- (IBAction)zooThumbnail:(UIButton *)sender {
+    
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+
+    RRReditEntry *reddit = [self.entries objectAtIndex:indexPath.row];
+    if (![reddit.type isEqualToString:@"youtube.com"]) {
+        UIImageView *fullImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        __block UILabel *progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 150, 50, 50)];
+        progressLabel.text = @"0.0";
+        progressLabel.textColor = [UIColor whiteColor];
+        
+        __weak UIImageView *_fullImage = fullImage;
+        [EXPhotoViewer showImageFrom:fullImage withProgressIndicator:progressLabel];
+        
+        [fullImage setImageWithURL:reddit.url placeholderImage:[UIImage imageNamed:@"placeholder.jpg"] options:SDWebImageProgressiveDownload progress:^(NSUInteger receivedSize, long long expectedSize)
+        {
+            if (expectedSize > 0) {
+                float percentage = (receivedSize/expectedSize)*100;
+                DLog(@"percentage: %f",percentage);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                      progressLabel.text = [NSString stringWithFormat:@"%.2f",percentage];
+                });
+            }
+            
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            
+            if (!error) {
+                _fullImage.image = image;
+                [EXPhotoViewer showImageFrom:_fullImage];
+            }
+        }];
+    }
+    else {
+        [[UIApplication sharedApplication] openURL:reddit.url];
+    }
 }
 @end

@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, RedditRequestType) {Fetch_NextBatch, Fetch_Latest} ;
 @interface RRStore : NSObject
 
 @property (nonatomic,strong) NSString *lastRedditID;
+@property (nonatomic,strong) NSString *currentSubReddit;
 
 +(RRStore*) sharedStore;
 

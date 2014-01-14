@@ -158,6 +158,7 @@
                                     <constraint firstItem="ETb-Kq-qWe" firstAttribute="centerY" secondItem="uiE-Nw-PE4" secondAttribute="centerY" id="ybG-MX-DPK"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="authorLabel" destination="4Xe-BU-Yq7" id="vEv-Vy-vCA"/>
                                     <outlet property="thumbnailView" destination="ETb-Kq-qWe" id="hB4-sU-hhu"/>
                                     <outlet property="titleLabel" destination="cKe-7b-nDR" id="Wm0-Xc-1fl"/>
                                     <segue destination="PBY-lU-Imy" kind="push" identifier="RedditDetail" id="jjY-yV-9Ax"/>

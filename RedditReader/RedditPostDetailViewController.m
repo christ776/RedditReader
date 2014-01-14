@@ -41,6 +41,13 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
 
 -(void) viewDidAppear:(BOOL)animated {
     
+    __block UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loadingIndicator.center = self.view.center;
+    [self.view addSubview:loadingIndicator];
+    [loadingIndicator startAnimating];
+    
+    __weak RedditPostDetailViewController *bself = self;
+    
     [[RRStore sharedStore] fetchRepliesForPost:self.redditEntry.redditId withCompletion:^(NSArray *obj, NSError *err) {
         if (!err) {
             
@@ -55,9 +62,11 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
             [self.comments addObjectsFromArray:obj];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView beginUpdates];
-                [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
-                [self.tableView endUpdates];
+                [bself.tableView beginUpdates];
+                [bself.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+                [bself.tableView endUpdates];
+                [loadingIndicator stopAnimating];
+                [loadingIndicator removeFromSuperview];
             });
             
         } else {
@@ -71,6 +80,8 @@ static NSString *redditEntryCellIdentifier = @"MyIdentifier";
                                    cancelButtonTitle:@"OK"
                                    otherButtonTitles:nil];
                 [av show];
+                 [loadingIndicator stopAnimating];
+                [loadingIndicator removeFromSuperview];
             });
         }
     }];

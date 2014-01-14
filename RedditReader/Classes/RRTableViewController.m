@@ -351,7 +351,7 @@
         __weak UIImageView *_fullImage = fullImage;
         [EXPhotoViewer showImageFrom:fullImage withProgressIndicator:progressLabel];
         
-        [fullImage setImageWithURL:reddit.url placeholderImage:[UIImage imageNamed:@"placeholder.jpg"] options:SDWebImageProgressiveDownload progress:^(NSUInteger receivedSize, long long expectedSize)
+        [fullImage setImageWithURL:reddit.url placeholderImage:[UIImage imageNamed:@"placeholder.jpg"] options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize)
         {
             if (expectedSize > 0) {
                 float percentage = (receivedSize/expectedSize)*100;
@@ -368,9 +368,6 @@
                 [EXPhotoViewer showImageFrom:_fullImage];
             }
         }];
-    }
-    else {
-        [[UIApplication sharedApplication] openURL:reddit.url];
     }
 }
 @end
